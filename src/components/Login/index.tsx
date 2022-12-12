@@ -6,10 +6,6 @@ interface Props {
   authService: any;
 }
 
-// type User = {
-//   uid: string;
-// };
-
 export default function Login(props: Props) {
   const uid: string = "";
   const { authService } = props;
