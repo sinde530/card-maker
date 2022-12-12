@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header";
 
 interface Props {
   authService: any;
@@ -25,9 +26,8 @@ export default function Maker(props: Props) {
 
   return (
     <div>
-      <button type="button" onClick={handleLogout}>
-        Logout
-      </button>
+      <Header onLogout={handleLogout} />
+
       <h1>wqewqewqewq</h1>
     </div>
   );

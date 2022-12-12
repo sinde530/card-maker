@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
+import Header from "../Header";
 
 import { LoginContainer, Li, Ul, GoogleButton, GithubButton } from "./styled";
 
@@ -34,7 +35,7 @@ export default function Login(props: Props) {
 
   return (
     <LoginContainer>
-      <p>Header Component</p>
+      <Header onLogout={undefined} />
       <div>
         <h1>Social Login Pages</h1>
         <Ul>
