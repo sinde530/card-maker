@@ -6,6 +6,7 @@
   "homepage": "https://sinde530.github.io/card-maker/",
   "scripts": {
     "dev": "vite dev --port 3000",
+    "lint": "eslint src",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
