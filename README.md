@@ -2,6 +2,11 @@
 
 ## deploy
 
+```tsx
+index.html 에서 base url 추가
+<base href="./본인 url">
+```
+
 build후에 preview로 봤을땐 멀쩡하지만, 실제 배포를 하면 repoName이 깨지는 경우가 있다.
 
 dist만 따로 빼서 저장을 해준다.
