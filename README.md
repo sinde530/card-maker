@@ -43,3 +43,9 @@ branch: master 여기서 커맨드 작성.
 ```tsx
 git subtree push --prefix dist origin gh-pages
 ```
+
+## 후에도 gh-pages rejected날때
+
+```
+gh-pages 브런치 날리고 다시 위에 작업 동일하게 실행.
+```
