@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import { Box, MakerContainer } from "./styled";
 
 interface Props {
   authService: any;
@@ -25,10 +26,11 @@ export default function Maker(props: Props) {
   }, []);
 
   return (
-    <div>
+    <MakerContainer>
       <Header onLogout={handleLogout} />
-
-      <h1>wqewqewqewq</h1>
-    </div>
+      <Box>
+        <p>Editor</p>
+      </Box>
+    </MakerContainer>
   );
 }

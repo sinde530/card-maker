@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const HeaderContainer = styled.div({
-  width: "100%",
+  // width: "100%",
   textAlign: "center",
   padding: "8px",
   position: "relative",
