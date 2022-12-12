@@ -21,7 +21,7 @@ export default function CreateEditForm({ updateCard, card }: Props) {
       return;
     }
     e.preventDefault();
-    updateCard({
+    updateCard(card.id, {
       ...card,
       [e.currentTarget.name]: e.currentTarget.value,
     });
