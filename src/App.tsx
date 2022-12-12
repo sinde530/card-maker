@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
+
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+import Login from "./components/Login";
+import AuthService from "./service/auth_service";
+import Maker from "./components/Maker";
 
+interface Props {
+  authService: AuthService;
+}
+
+function App({ authService }: Props) {
   return (
     <div className="App">
       <div>
@@ -16,6 +23,16 @@ function App() {
         </a>
       </div>
       <h1>Card Maker</h1>
+      <Routes>
+        <Route
+          path="/card-maker"
+          element={<Login authService={authService} />}
+        />
+        <Route
+          path="/card-maker/maker"
+          element={<Maker authService={authService} />}
+        />
+      </Routes>
     </div>
   );
 }
