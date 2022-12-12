@@ -7,11 +7,11 @@ export const LoginContainer = styled.div({
   justifyContent: "center",
   backgroundColor: "#333",
   display: "flex",
+  padding: "8px",
 });
 
 export const Ul = styled.ul({
   width: "100%",
-  // padding: "8px",
 });
 
 export const Li = styled.li({
