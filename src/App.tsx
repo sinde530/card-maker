@@ -1,28 +1,27 @@
 import { Route, Routes } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-
-import "./App.css";
+import styled from "@emotion/styled";
 
 import Login from "./components/Login";
-import AuthService from "./service/auth_service";
 import Maker from "./components/Maker";
+
+import AuthService from "./service/auth_service";
 
 interface Props {
   authService: AuthService;
 }
 
+const Container = styled.div({
+  width: "100%",
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#626262",
+});
+
 function App({ authService }: Props) {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Card Maker</h1>
+    <Container>
       <Routes>
         <Route
           path="/card-maker"
@@ -33,7 +32,7 @@ function App({ authService }: Props) {
           element={<Maker authService={authService} />}
         />
       </Routes>
-    </div>
+    </Container>
   );
 }
 

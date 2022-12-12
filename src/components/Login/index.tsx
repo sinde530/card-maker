@@ -2,6 +2,8 @@
 import { useEffect } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 
+import { LoginContainer, Li, Ul, GoogleButton, GithubButton } from "./styled";
+
 interface Props {
   authService: any;
 }
@@ -31,24 +33,24 @@ export default function Login(props: Props) {
   }, []);
 
   return (
-    <div>
+    <LoginContainer>
       <p>Header Component</p>
       <div>
         <h1>Social Login Pages</h1>
-        <ul>
-          <li>
-            <button type="button" onClick={handleClickLogin}>
+        <Ul>
+          <Li>
+            <GoogleButton type="button" onClick={handleClickLogin}>
               Google
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={handleClickLogin}>
+            </GoogleButton>
+          </Li>
+          <Li>
+            <GithubButton type="button" onClick={handleClickLogin}>
               GitHub
-            </button>
-          </li>
-        </ul>
+            </GithubButton>
+          </Li>
+        </Ul>
       </div>
       <p>Footer Component</p>
-    </div>
+    </LoginContainer>
   );
 }
