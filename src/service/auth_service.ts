@@ -4,6 +4,7 @@ import {
   getAuth,
   signInWithPopup,
 } from "firebase/auth";
+import { firebaseApp } from "./firebase";
 
 export default class AuthService {
   firebaseAuth: any;
@@ -13,7 +14,7 @@ export default class AuthService {
   githubProvider: GithubAuthProvider;
 
   constructor() {
-    this.firebaseAuth = getAuth();
+    this.firebaseAuth = getAuth(firebaseApp);
     this.googleProvider = new GoogleAuthProvider();
     this.githubProvider = new GithubAuthProvider();
   }
