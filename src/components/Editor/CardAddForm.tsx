@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "src/common/Button";
 import { Card } from "src/types/Card";
+import { CloudnaryFile } from "src/types/Image";
 import { ButtonWraaper, Form, Input, TextArea } from "./styled";
 
 interface Props {
@@ -15,10 +16,10 @@ export default function CardAddForm({ addCard }: Props) {
   const titleRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  // const [file, setFile] = useState<CloudinaryFile>({
-  //   original_filename: "",
-  //   secure_url: "",
-  // });
+  const [file, setFile] = useState<CloudnaryFile>({
+    originalFilename: "",
+    secureUrl: "",
+  });
 
   const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -30,22 +31,22 @@ export default function CardAddForm({ addCard }: Props) {
       title: titleRef.current?.value || "",
       email: emailRef.current?.value || "",
       message: messageRef.current?.value || "",
-      // filename: file.original_filename || "",
-      // url: file.secure_url || "",
+      fileName: file.originalFilename || "",
+      fileUrl: file.secureUrl || "",
     };
     formRef.current?.reset();
-    // setFile({ original_filename: "", secure_url: "" });
+    setFile({ originalFilename: "", secureUrl: "" });
     addCard(newCard);
   };
 
-  // const handleCardWhenFileChange = (uploaded: CloudinaryFile) => {
-  //   const original_filename = uploaded.original_filename;
-  //   const secure_url = uploaded.secure_url;
-  //   setFile({
-  //     original_filename,
-  //     secure_url,
-  //   });
-  // };
+  const handleCardWhenFileChange = (uploaded: CloudnaryFile) => {
+    const original_filename = uploaded.originalFileName;
+    const secure_url = uploaded.secureUrl;
+    setFile({
+      original_filename,
+      secure_url,
+    });
+  };
 
   return (
     <Form ref={formRef}>

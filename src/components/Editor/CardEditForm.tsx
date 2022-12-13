@@ -2,17 +2,23 @@ import React from "react";
 import Button from "src/common/Button";
 
 import { Card } from "src/types/Card";
+import { CloudnaryFile } from "src/types/Image";
 import { ButtonWraaper, Form, Input, TextArea } from "./styled";
 
 interface Props {
   card: Card;
   deleteCard: Function;
   updateCard: Function;
+  FileInput: Function;
 }
 
-export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
-  const { id, name, company, theme, title, email, message, fileName, fileUrl } =
-    card;
+export default function CardEditForm({
+  card,
+  deleteCard,
+  updateCard,
+  FileInput,
+}: Props) {
+  const { id, name, company, theme, title, email, message, fileName } = card;
 
   const handleDelete = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -33,16 +39,16 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
     updateCard(updatedCard);
   };
 
-  // const handleCardWhenFileChange = (uploaded: CloudinaryFile) => {
-  //   const original_filename = uploaded.original_filename;
-  //   const secure_url = uploaded.secure_url;
-  //   const updatedCard = {
-  //     ...card,
-  //     filename: original_filename,
-  //     url: secure_url,
-  //   };
-  //   updateCard(updatedCard);
-  // };
+  const handleCardWhenFileChange = (uploaded: CloudnaryFile) => {
+    const originalFilename = uploaded.original_fileName;
+    const secureUrl = uploaded.secure_Url;
+    const updatedCard = {
+      ...card,
+      fileName: originalFilename,
+      fileUrl: secureUrl,
+    };
+    updateCard(updatedCard);
+  };
 
   return (
     <Form>
@@ -77,7 +83,10 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
       />
       <TextArea name="message" defaultValue={message} onChange={handleUpdate} />
       <ButtonWraaper>
-        {/* <p>FileInput</p> */}
+        <FileInput
+          name={fileName}
+          handleCardWhenFileChange={handleCardWhenFileChange}
+        />
         <Button
           name="Delete"
           color="#2980b9"

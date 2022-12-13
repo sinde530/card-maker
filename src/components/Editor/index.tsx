@@ -9,6 +9,7 @@ interface Props {
   addCard: Function;
   deleteCard: Function;
   updateCard: Function;
+  FileInput: Function;
 }
 
 const EditorContainer = styled.div({
@@ -33,6 +34,7 @@ export default function Editor({
   addCard,
   deleteCard,
   updateCard,
+  FileInput,
 }: Props) {
   return (
     <EditorContainer>
@@ -43,9 +45,10 @@ export default function Editor({
           card={card}
           deleteCard={deleteCard}
           updateCard={updateCard}
+          FileInput={FileInput}
         />
       ))}
-      <CardAddForm addCard={addCard} />
+      <CardAddForm addCard={addCard} FileInput={FileInput} />
     </EditorContainer>
   );
 }

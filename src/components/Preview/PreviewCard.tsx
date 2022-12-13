@@ -72,11 +72,11 @@ export default function PreviewCard({ card }: Prop) {
    * 4. File Uploader 시키기.
    * 5. Card Preview 오른쪽으로 정렬시키기.
    */
-  const { id, name, company, theme, title, email, message, fileUrl } = card;
+  const { name, company, theme, title, email, message, fileUrl } = card;
 
   return (
     <Container theme={theme}>
-      <Image src="" alt="" />
+      <Image src={fileUrl || ""} />
       <MetaData theme={theme}>
         <Data $name>{name}</Data>
         <Data>{company}</Data>

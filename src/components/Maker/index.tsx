@@ -10,6 +10,7 @@ import Preview from "../Preview";
 import { Box, MakerContainer } from "./styled";
 
 interface Props {
+  FileInput: Function;
   fireBaseRealTiemDB: FireBaseRealTimeDB;
   fireBaseAuthService: AuthService;
 }
@@ -19,6 +20,7 @@ interface LoginResult {
 }
 
 export default function Maker({
+  FileInput,
   fireBaseRealTiemDB,
   fireBaseAuthService,
 }: Props) {
@@ -80,6 +82,7 @@ export default function Maker({
           addCard={addCard}
           deleteCard={deleteCard}
           updateCard={updateCard}
+          FileInput={FileInput}
         />
         <Preview cards={cards} />
       </Box>
