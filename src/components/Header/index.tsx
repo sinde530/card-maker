@@ -1,14 +1,14 @@
 import { HeaderContainer, Logo, LogoutButton, Title } from "./styled";
 
 interface Props {
-  onLogout: any;
+  handleLogout?: () => void;
 }
 
-export default function Header({ onLogout }: Props) {
+export default function Header({ handleLogout }: Props) {
   return (
     <HeaderContainer>
-      {onLogout && (
-        <LogoutButton type="button" onClick={onLogout}>
+      {handleLogout && (
+        <LogoutButton type="button" onClick={handleLogout}>
           Logout
         </LogoutButton>
       )}

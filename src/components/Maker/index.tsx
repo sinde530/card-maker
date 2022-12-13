@@ -1,94 +1,80 @@
+import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AuthService from "src/service/auth_service";
+import { Card } from "src/types/Card";
+import { FireBaseRealTimeDB } from "src/types/Firebase";
 import Editor from "../Editor";
 import Header from "../Header";
 import { Box, MakerContainer } from "./styled";
 
 interface Props {
-  authService: any;
+  fireBaseRealTiemDB: FireBaseRealTimeDB;
+  fireBaseAuthService: AuthService;
 }
 
-export default function Maker(props: Props) {
-  const { authService } = props;
+interface LoginResult {
+  userId: string;
+}
+
+export default function Maker({
+  fireBaseRealTiemDB,
+  fireBaseAuthService,
+}: Props) {
+  const [cards, setCards] = useState<Card[]>([]);
   const navigate = useNavigate();
+  const location = useLocation().state as LoginResult;
+  const { userId } = location;
 
-  const [cards, setCards] = useState({
-    1: {
-      id: "1",
-      name: "SungEun1",
-      company: "MT",
-      theme: "dark",
-      title: "FE",
-      email: "sinde530@gmail.com",
-      message: "go for it",
-      fileName: "GANADA",
-      fileURL: null,
-    },
-    2: {
-      id: "2",
-      name: "SungEun2",
-      company: "MT",
-      theme: "dark",
-      title: "FE",
-      email: "sinde530@gmail.com",
-      message: "go for it",
-      fileName: "GANADA",
-      fileURL: null,
-    },
-    3: {
-      id: "3",
-      name: "SungEun3",
-      company: "MT",
-      theme: "dark",
-      title: "FE",
-      email: "sinde530@gmail.com",
-      message: "go for it",
-      fileName: "GANADA",
-      fileURL: null,
-    },
-  });
+  useEffect(() => {
+    const goToLogin = (): void => {
+      navigate("/card-maker");
+    };
 
-  const handleLogout = () => {
-    authService.logout();
+    fireBaseAuthService.onAuthChange((user: User | null) => {
+      if (!user) {
+        goToLogin();
+      }
+    });
+  }, [fireBaseAuthService, navigate]);
+
+  useEffect(() => {
+    const stopSync = fireBaseRealTiemDB.syncCards(userId, setCards);
+
+    return () => stopSync(); // Detach listeners
+  }, [fireBaseRealTiemDB, userId]);
+
+  const addCard = (newCard: Card) => {
+    setCards((card) => {
+      fireBaseRealTiemDB.setCards(userId, newCard);
+      return [...card, newCard];
+    });
   };
 
-  const handleCreateOrUpdateCard = (card: {
-    id: string;
-    name: string;
-    company: string;
-    theme: string;
-    title: string;
-    email: string;
-    message: string;
-    fileName: string;
-    fileURL: null;
-  }) => {
-    setCards((prev) => {
-      const updated = { ...prev };
-      updated[cards.id] = card;
+  const deleteCard = (id: string): void => {
+    setCards((cardData) => cardData.filter((card) => card.id !== id));
+    fireBaseRealTiemDB.removeCard(userId, id);
+  };
+
+  const updateCard = (updatedCard: Card): void => {
+    const updated: Card[] = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
+    );
+    setCards(() => {
+      fireBaseRealTiemDB.setCards(userId, updatedCard);
       return updated;
     });
   };
-  useEffect(() => {
-    authService //
-      .onAuthChange((user: any) => {
-        console.log("user", user);
-        if (user === null) {
-          navigate("/card-maker");
-        }
-      });
-  }, []);
+
+  const handleLogout = (): void => {
+    fireBaseAuthService.logout();
+  };
 
   return (
     <MakerContainer>
-      <Header onLogout={handleLogout} />
-      <Box>
-        <Editor
-          addCard={handleCreateOrUpdateCard}
-          updateCard={handleCreateOrUpdateCard}
-          cards={cards}
-        />
-      </Box>
+      <Header handleLogout={handleLogout} />
+      <Box>{/* <Editor /> */}</Box>
+      rkskek
     </MakerContainer>
   );
 }

@@ -1,48 +1,48 @@
 import {
-  GoogleAuthProvider,
-  GithubAuthProvider,
+  Auth,
+  AuthProvider,
   getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
+  signOut,
+  User,
+  UserCredential,
 } from "firebase/auth";
+import { FireBaseAuthService } from "src/types/Firebase";
 import { firebaseApp } from "./firebase";
 
-export default class AuthService {
-  firebaseAuth: any;
+export default class AuthService implements FireBaseAuthService {
+  private auth: Auth = getAuth(firebaseApp);
 
-  googleProvider: GoogleAuthProvider;
-
-  githubProvider: GithubAuthProvider;
+  private googleProvider: GoogleAuthProvider;
 
   constructor() {
-    this.firebaseAuth = getAuth(firebaseApp);
     this.googleProvider = new GoogleAuthProvider();
-    this.githubProvider = new GithubAuthProvider();
   }
 
-  login(providerName: any) {
-    const authProvider = this.getProvider(providerName);
-    return signInWithPopup(this.firebaseAuth, authProvider);
+  login(providerName: string): Promise<UserCredential> {
+    const provider: AuthProvider = this.getProvider(providerName);
+    return signInWithPopup(this.auth, provider);
   }
 
-  // logout
-  logout() {
-    this.firebaseAuth.signOut();
+  logout(): void {
+    signOut(this.auth);
   }
 
-  onAuthChange(onUserChanged: (arg0: any) => void) {
-    this.firebaseAuth.onAuthStateChanged((user: any) => {
+  private getProvider(providerName: string): AuthProvider {
+    switch (providerName) {
+      case "google":
+        return this.googleProvider;
+      // case: github, phone number etc...
+      default:
+        throw new Error("provider error");
+    }
+  }
+
+  onAuthChange(onUserChanged: Function): void {
+    onAuthStateChanged(this.auth, (user: User | null) => {
       onUserChanged(user);
     });
-  }
-
-  getProvider(providerName: any) {
-    switch (providerName) {
-      case "Google":
-        return this.googleProvider;
-      case "Github":
-        return this.githubProvider;
-      default:
-        throw new Error(`Not supported provider :${providerName}`);
-    }
   }
 }

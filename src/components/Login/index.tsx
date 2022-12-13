@@ -1,35 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import { User } from "firebase/auth";
 import { useEffect } from "react";
-import { NavigateOptions, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FireBaseAuthService } from "src/types/Firebase";
 import Header from "../Header";
 
-import { LoginContainer, Li, Ul, GoogleButton, GithubButton } from "./styled";
+import { LoginContainer, Li, Ul, GoogleButton } from "./styled";
 
 interface Props {
-  authService: any;
+  fireBaseAuthService: FireBaseAuthService;
 }
 
-export default function Login(props: Props) {
-  const uid: string = "";
-  const { authService } = props;
+export default function Login({ fireBaseAuthService }: Props) {
   const navigate = useNavigate();
 
-  const GoToMaker = (userId: any) => {
-    // 두 번째 인수의 타입을 NavigateOptions로 변경
-    if (userId) {
-      navigate("maker", { id: userId } as NavigateOptions);
-    }
+  const goToMaker = (userId: string) => {
+    navigate("maker", { state: { userId } });
   };
 
-  const handleClickLogin = (e: any) => {
-    authService
-      .login(e.currentTarget.textContent)
-      .then((data: any) => GoToMaker(data.user.uid));
+  const handleClickLogin = (providerName: string) => {
+    fireBaseAuthService.login(providerName).then((result) => {
+      goToMaker(result.user.uid);
+    });
   };
 
   useEffect(() => {
-    authService.onAuthChange((user: any) => {
-      user && GoToMaker(uid);
+    fireBaseAuthService.onAuthChange((user: User | null) => {
+      user && goToMaker(user.uid);
     });
   }, []);
 
@@ -40,15 +37,15 @@ export default function Login(props: Props) {
         <h1>Social Login Pages</h1>
         <Ul>
           <Li>
-            <GoogleButton type="button" onClick={handleClickLogin}>
+            <GoogleButton type="button" onClick={() => handleClickLogin}>
               Google
             </GoogleButton>
           </Li>
-          <Li>
+          {/* <Li>
             <GithubButton type="button" onClick={handleClickLogin}>
               GitHub
             </GithubButton>
-          </Li>
+          </Li> */}
         </Ul>
       </div>
       <p>Footer Component</p>

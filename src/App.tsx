@@ -5,9 +5,10 @@ import Login from "./components/Login";
 import Maker from "./components/Maker";
 
 import AuthService from "./service/auth_service";
+import { FireBaseRealTimeDB } from "./types/Firebase";
 
 interface Props {
-  authService: AuthService;
+  fireBaseRealTiemDB: FireBaseRealTimeDB;
 }
 
 const Container = styled.div({
@@ -19,17 +20,23 @@ const Container = styled.div({
   backgroundColor: "#626262",
 });
 
-function App({ authService }: Props) {
+function App({ fireBaseRealTiemDB }: Props) {
+  const fireBaseAuthService = new AuthService();
   return (
     <Container>
       <Routes>
         <Route
           path="/card-maker"
-          element={<Login authService={authService} />}
+          element={<Login fireBaseAuthService={fireBaseAuthService} />}
         />
         <Route
           path="/card-maker/maker"
-          element={<Maker authService={authService} />}
+          element={
+            <Maker
+              fireBaseRealTiemDB={fireBaseRealTiemDB}
+              fireBaseAuthService={fireBaseAuthService}
+            />
+          }
         />
       </Routes>
     </Container>
