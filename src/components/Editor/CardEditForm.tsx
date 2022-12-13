@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "src/common/Button";
 
 import { Card } from "src/types/Card";
 
@@ -12,10 +13,13 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
   const { id, name, company, theme, title, email, message, fileName, fileUrl } =
     card;
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleDelete = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    uid: string
+  ): void => {
     e.preventDefault();
-    console.log(id);
-    deleteCard(id);
+    console.log(uid);
+    deleteCard(uid);
   };
 
   const handleUpdate = (
@@ -74,7 +78,11 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
       <textarea name="message" defaultValue={message} onChange={handleUpdate} />
       <div>
         {/* <p>FileInput</p> */}
-        <button name="Delete" type="button" onClick={handleDelete} />{" "}
+        <Button
+          name="Delete"
+          color="#2980b9"
+          handleClick={(e) => handleDelete(e, id)}
+        />
       </div>
     </form>
   );
