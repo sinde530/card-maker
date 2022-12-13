@@ -1,17 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import AuthService from "./service/auth_service";
-import FireBaseRealTimeDBImpl from "./service/firebase_realtime_db";
-// import ImageUpload from "./service/image_uploader";
 
-// const authService = new AuthService();
+import FireBaseRealTimeDBImpl from "./service/firebase_realtime_db";
+
 const fireBaseRealTimeDB = new FireBaseRealTimeDBImpl();
-// const ImageUploader = new ImageUpload();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

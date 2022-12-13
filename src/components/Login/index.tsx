@@ -32,12 +32,15 @@ export default function Login({ fireBaseAuthService }: Props) {
 
   return (
     <LoginContainer>
-      <Header onLogout={undefined} />
+      <Header />
       <div>
         <h1>Social Login Pages</h1>
         <Ul>
           <Li>
-            <GoogleButton type="button" onClick={() => handleClickLogin}>
+            <GoogleButton
+              type="button"
+              onClick={() => handleClickLogin("google")}
+            >
               Google
             </GoogleButton>
           </Li>

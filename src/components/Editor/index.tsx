@@ -1,21 +1,29 @@
-import CreateEditForm from "./CreateEditForm";
+import { Card } from "src/types/Card";
+import CardEditForm from "./CardEditForm";
+import CreateEditForm from "./CardEditForm";
 
 interface Props {
-  addCard: any;
-  updateCard: any;
-  cards: { [key: string]: any };
+  cards: Card[];
+  addCard: Function;
+  deleteCard: Function;
+  updateCard: Function;
 }
 
-export default function Editor({ addCard, updateCard, cards }: Props) {
+export default function Editor({
+  cards,
+  addCard,
+  deleteCard,
+  updateCard,
+}: Props) {
   return (
     <div>
-      {Object.keys(cards).map((key) => (
-        <CreateEditForm
-          key={key}
-          // FileInput={FileInput}
-          card={cards[key]}
+      <h2>Card Maker</h2>
+      {cards.map((card) => (
+        <CardEditForm
+          key={card.id}
+          card={card}
+          deleteCard={deleteCard}
           updateCard={updateCard}
-          // deleteCard={deleteCard}
         />
       ))}
     </div>

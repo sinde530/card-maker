@@ -30,6 +30,7 @@ export default class FireBaseRealTimeDBImpl implements FireBaseRealTimeDB {
     onValue(syncRef, (snapshot) => {
       const arrCards: Card[] = [];
       const cards = snapshot.val();
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       cards && Object.keys(cards).map((key) => arrCards.push(cards[key]));
       console.log(cards);
 

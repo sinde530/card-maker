@@ -73,8 +73,15 @@ export default function Maker({
   return (
     <MakerContainer>
       <Header handleLogout={handleLogout} />
-      <Box>{/* <Editor /> */}</Box>
-      rkskek
+      <Box>
+        <Editor
+          cards={cards}
+          addCard={addCard}
+          deleteCard={deleteCard}
+          updateCard={updateCard}
+        />
+      </Box>
+      Preview Component
     </MakerContainer>
   );
 }
