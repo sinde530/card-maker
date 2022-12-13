@@ -58,11 +58,20 @@ const Data = styled.span<DataProps>`
     display: block;
     width: 90%;
     height: 1px;
+    margin-top: 4px;
     background-color: lightgray;
   }
 `;
 
 export default function PreviewCard({ card }: Prop) {
+  /**
+   * theme test까지함.
+   * 1. 데이터 할당받은 id 어떻게 처리할지.
+   * 2. Image Resource 받아오기.
+   * 3. Styled 정리.
+   * 4. File Uploader 시키기.
+   * 5. Card Preview 오른쪽으로 정렬시키기.
+   */
   const { id, name, company, theme, title, email, message, fileUrl } = card;
 
   return (

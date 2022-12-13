@@ -4,6 +4,7 @@ export const MakerContainer = styled.div({
   width: "100%",
   height: "100%",
   display: "flex",
+  maxWidth: "80rem",
   flexDirection: "column",
 });
 

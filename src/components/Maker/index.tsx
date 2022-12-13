@@ -81,8 +81,8 @@ export default function Maker({
           deleteCard={deleteCard}
           updateCard={updateCard}
         />
+        <Preview cards={cards} />
       </Box>
-      <Preview cards={cards} />
     </MakerContainer>
   );
 }
