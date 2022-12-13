@@ -1,6 +1,7 @@
 import { Card } from "src/types/Card";
+
+import CardAddForm from "./CardAddForm";
 import CardEditForm from "./CardEditForm";
-import CreateEditForm from "./CardEditForm";
 
 interface Props {
   cards: Card[];
@@ -26,6 +27,7 @@ export default function Editor({
           updateCard={updateCard}
         />
       ))}
+      <CardAddForm addCard={addCard} />
     </div>
   );
 }
