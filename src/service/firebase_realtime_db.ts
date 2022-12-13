@@ -7,8 +7,10 @@ import {
   remove,
   set,
 } from "firebase/database";
+
 import { Card } from "src/types/Card";
 import { FireBaseRealTimeDB } from "src/types/Firebase";
+
 import { firebaseApp } from "./firebase";
 
 export default class FireBaseRealTimeDBImpl implements FireBaseRealTimeDB {
@@ -32,8 +34,6 @@ export default class FireBaseRealTimeDBImpl implements FireBaseRealTimeDB {
       const cards = snapshot.val();
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       cards && Object.keys(cards).map((key) => arrCards.push(cards[key]));
-      console.log(cards);
-
       setCards(arrCards);
     });
 
