@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Button from "src/common/Button";
 import { Card } from "src/types/Card";
+import { ButtonWraaper, Form, Input, TextArea } from "./styled";
 
 interface Props {
   addCard: Function;
@@ -47,9 +48,9 @@ export default function CardAddForm({ addCard }: Props) {
   // };
 
   return (
-    <form ref={formRef}>
-      <input type="text" name="name" placeholder="name" ref={nameRef} />
-      <input
+    <Form ref={formRef}>
+      <Input type="text" name="name" placeholder="name" ref={nameRef} />
+      <Input
         type="text"
         name="company"
         placeholder="company"
@@ -60,13 +61,13 @@ export default function CardAddForm({ addCard }: Props) {
         <option>dark</option>
         <option>colorful</option>
       </select>
-      <input type="text" name="title" placeholder="title" ref={titleRef} />
-      <input type="text" name="email" placeholder="email" ref={emailRef} />
-      <textarea name="message" placeholder="message" ref={messageRef} />
-      <div>
+      <Input type="text" name="title" placeholder="title" ref={titleRef} />
+      <Input type="text" name="email" placeholder="email" ref={emailRef} />
+      <TextArea name="message" placeholder="message" ref={messageRef} />
+      <ButtonWraaper>
         <p>FileInput</p>
         <Button name="Add" handleClick={handleAdd} color="#000000" />
-      </div>
-    </form>
+      </ButtonWraaper>
+    </Form>
   );
 }

@@ -7,7 +7,11 @@ export const MakerContainer = styled.div({
   flexDirection: "column",
 });
 
-export const Box = styled.div({
-  display: "flex",
-  flex: "1",
-});
+export const Box = styled.div`
+  display: flex;
+  flex: 1;
+
+  @media screen and (max-width: 42rem) {
+    flex-direction: column;
+  }
+`;

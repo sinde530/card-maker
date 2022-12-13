@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { Card } from "src/types/Card";
 
 import CardAddForm from "./CardAddForm";
@@ -10,6 +11,23 @@ interface Props {
   updateCard: Function;
 }
 
+const EditorContainer = styled.div({
+  textAlign: "center",
+  flexBasis: "50%",
+  borderRight: "1px solid gray",
+  overflowY: "auto",
+});
+
+const TitleText = styled.h1({
+  fontSize: "24px",
+  position: "sticky",
+  top: "0px",
+  padding: "8px",
+  marginTop: "0",
+  backgroundColor: "wheat",
+  color: "#000000",
+});
+
 export default function Editor({
   cards,
   addCard,
@@ -17,8 +35,8 @@ export default function Editor({
   updateCard,
 }: Props) {
   return (
-    <div>
-      <h2>Card Maker</h2>
+    <EditorContainer>
+      <TitleText>Card Maker</TitleText>
       {cards.map((card) => (
         <CardEditForm
           key={card.id}
@@ -28,6 +46,6 @@ export default function Editor({
         />
       ))}
       <CardAddForm addCard={addCard} />
-    </div>
+    </EditorContainer>
   );
 }

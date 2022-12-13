@@ -2,6 +2,7 @@ import React from "react";
 import Button from "src/common/Button";
 
 import { Card } from "src/types/Card";
+import { ButtonWraaper, Form, Input, TextArea } from "./styled";
 
 interface Props {
   card: Card;
@@ -44,14 +45,14 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
   // };
 
   return (
-    <form>
-      <input
+    <Form>
+      <Input
         type="text"
         name="name"
         defaultValue={name}
         onChange={handleUpdate}
       />
-      <input
+      <Input
         type="text"
         name="company"
         defaultValue={company}
@@ -62,27 +63,27 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
         <option value="dard">dark</option>
         <option value="colorful">colorFul</option>
       </select>
-      <input
+      <Input
         type="text"
         name="title"
         defaultValue={title}
         onChange={handleUpdate}
       />
-      <input
+      <Input
         type="text"
         name="email"
         defaultValue={email}
         onChange={handleUpdate}
       />
-      <textarea name="message" defaultValue={message} onChange={handleUpdate} />
-      <div>
+      <TextArea name="message" defaultValue={message} onChange={handleUpdate} />
+      <ButtonWraaper>
         {/* <p>FileInput</p> */}
         <Button
           name="Delete"
           color="#2980b9"
           handleClick={(e) => handleDelete(e, id)}
         />
-      </div>
-    </form>
+      </ButtonWraaper>
+    </Form>
   );
 }

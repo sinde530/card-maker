@@ -12,7 +12,7 @@ interface Props {
   fireBaseRealTiemDB: FireBaseRealTimeDB;
 }
 
-function App({ fireBaseRealTiemDB }: Props) {
+export default function App({ fireBaseRealTiemDB }: Props) {
   const fireBaseAuthService = new AuthService();
   return (
     <Container>
@@ -34,5 +34,3 @@ function App({ fireBaseRealTiemDB }: Props) {
     </Container>
   );
 }
-
-export default App;
