@@ -6,6 +6,7 @@ import { Card } from "src/types/Card";
 import { FireBaseRealTimeDB } from "src/types/Firebase";
 import Editor from "../Editor";
 import Header from "../Header";
+import Preview from "../Preview";
 import { Box, MakerContainer } from "./styled";
 
 interface Props {
@@ -81,7 +82,7 @@ export default function Maker({
           updateCard={updateCard}
         />
       </Box>
-      Preview Component
+      <Preview cards={cards} />
     </MakerContainer>
   );
 }
