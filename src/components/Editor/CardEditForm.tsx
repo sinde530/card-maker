@@ -18,7 +18,6 @@ export default function CardEditForm({ card, deleteCard, updateCard }: Props) {
     uid: string
   ): void => {
     e.preventDefault();
-    console.log(uid);
     deleteCard(uid);
   };
 
