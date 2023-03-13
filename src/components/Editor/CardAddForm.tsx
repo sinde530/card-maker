@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { useRef, useState } from "react";
 import Button from "src/common/Button";
 import { Card } from "src/types/Card";
@@ -6,9 +7,10 @@ import { ButtonWraaper, Form, Input, TextArea } from "./styled";
 
 interface Props {
   addCard: Function;
+  FileInput: Function;
 }
 
-export default function CardAddForm({ addCard }: Props) {
+export default function CardAddForm({ addCard, FileInput }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const companyRef = useRef<HTMLInputElement>(null);
@@ -17,8 +19,8 @@ export default function CardAddForm({ addCard }: Props) {
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [file, setFile] = useState<CloudnaryFile>({
-    originalFilename: "",
-    secureUrl: "",
+    original_filename: "",
+    secure_url: "",
   });
 
   const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,22 +33,30 @@ export default function CardAddForm({ addCard }: Props) {
       title: titleRef.current?.value || "",
       email: emailRef.current?.value || "",
       message: messageRef.current?.value || "",
-      fileName: file.originalFilename || "",
-      fileUrl: file.secureUrl || "",
+      fileName: file.original_filename || "",
+      fileUrl: file.secure_url || "",
     };
     formRef.current?.reset();
-    setFile({ originalFilename: "", secureUrl: "" });
+    setFile({ original_filename: "", secure_url: "" });
     addCard(newCard);
   };
 
   const handleCardWhenFileChange = (uploaded: CloudnaryFile) => {
-    const original_filename = uploaded.originalFileName;
-    const secure_url = uploaded.secureUrl;
+    // uploaded === undefined
+    // eslint-disable-next-line prefer-destructuring
+    const original_filename = uploaded.original_filename;
+    // eslint-disable-next-line prefer-destructuring
+    const secure_url = uploaded.secure_url;
     setFile({
       original_filename,
       secure_url,
     });
   };
+
+  /**
+   * cloudinary Erorr
+   * Fetch Api cannot load "env.VITE_CLOUDINARY_URL" URL scheme "cloudinary" is not supported
+   */
 
   return (
     <Form ref={formRef}>
@@ -66,7 +76,10 @@ export default function CardAddForm({ addCard }: Props) {
       <Input type="text" name="email" placeholder="email" ref={emailRef} />
       <TextArea name="message" placeholder="message" ref={messageRef} />
       <ButtonWraaper>
-        <p>FileInput</p>
+        <FileInput
+          name={file.original_filename}
+          handleCardWhenFileChange={handleCardWhenFileChange}
+        />
         <Button name="Add" handleClick={handleAdd} color="#000000" />
       </ButtonWraaper>
     </Form>

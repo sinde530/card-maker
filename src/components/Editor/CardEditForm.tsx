@@ -40,8 +40,8 @@ export default function CardEditForm({
   };
 
   const handleCardWhenFileChange = (uploaded: CloudnaryFile) => {
-    const originalFilename = uploaded.original_fileName;
-    const secureUrl = uploaded.secure_Url;
+    const originalFilename = uploaded.original_filename;
+    const secureUrl = uploaded.secure_url;
     const updatedCard = {
       ...card,
       fileName: originalFilename,

@@ -3,6 +3,6 @@ export interface ImageUpload {
 }
 
 export interface CloudnaryFile {
-  original_fileName?: string;
-  secure_Url?: string;
+  original_filename?: string;
+  secure_url?: string;
 }
